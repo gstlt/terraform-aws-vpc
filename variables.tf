@@ -22,10 +22,6 @@ variable "name" {
     description = ""
 }
 
-variable "ssh_access_from_cidr" {
-    description = ""
-}
-
 variable "map_public_ip_on_launch" {
     description = "Map public ip on EC2 instance launch"
     default = false
