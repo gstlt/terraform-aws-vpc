@@ -6,7 +6,7 @@ Terraform module for managing VPCs
 
 ```
 module "sample_vpc" {
-    source "github.com/gstlt/terraform-aws-vpc"
+    source = "github.com/gstlt/terraform-aws-vpc"
 
     name = "sample_vpc DEV"
 
