@@ -36,6 +36,15 @@ variable "azs_mapping" {
 }
 ```
 
+## Creates
+
+* VPC
+* Subnets - the more you define, the more you'll get. If you specify 6 subnets in a zone with 2 availiability zones, you'll get 3 subnets in zone a and 3 in zone b
+* Internet gateway
+* Route table for public subnets
+* NAT gateways, one per private subnet
+* Route tables for private subnets (one for each)
+
 ## Outputs
 
 * vpc_id - ID of created VPC
