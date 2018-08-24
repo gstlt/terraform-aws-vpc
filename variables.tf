@@ -1,24 +1,25 @@
 variable "region" {
-    description = "Region of the VPC, eg. eu-central-1"
+  description = "Region of the VPC, eg. eu-central-1"
 }
 
-variable "cidr_block" {
-    description = "CIDR block for a vpc, eg. 10.100.0.0/16"
-    default = "10.100.0.0/16"
+variable "vpc_cidr_block" {
+  description = "CIDR block for a vpc, eg. 10.100.0.0/16"
 }
 
-variable "cidr_prefix" {
-    description = "That depends on your netmask, eg. 10.100"
-    default = "10.100"
+variable "public_subnets_cidr_block" {
+  description = "CIDR block for public subnets"
+  type = "list"
 }
 
-variable "subnets_netmask" {
-    description = "Netmask of all created subnets, eg. 24"
-    default = "24"
+variable "private_subnets_cidr_block" {
+  description = "CIDR block for private subnets"
+  type = "list"
 }
 
 variable "name" {
-    description = ""
+  description = "Name used in tagging of resources"
+  type = "string"
+  default = ""
 }
 
 variable "map_public_ip_on_launch" {
@@ -45,7 +46,7 @@ variable "azs_mapping" {
         # Ireland
         eu-west-1      = "a,b,c"
         # DE, Frankfurt
-        eu-central-1   = "a,b"
+        eu-central-1   = "a,b,c"
         # UK, London
         eu-west-2      = "a,b"
         # Singapore

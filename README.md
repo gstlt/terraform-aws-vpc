@@ -2,21 +2,27 @@
 
 Terraform module for managing VPCs
 
-## Sample usage
+## Usage
 
 ```
-module "sample_vpc" {
-    source = "github.com/gstlt/terraform-aws-vpc"
+module "main_vpc" {
+  source = "modules/vpc"
 
-    name = "sample_vpc DEV"
+  name   = "Main"
+  region = "eu-cental-1"
 
-    region = "eu-central-1"
-    map_public_ip_on_launch = true
+  vpc_cidr_block = "10.100.0.0/16"
+
+  public_subnets_cidr_block  = ["10.100.0.0/24", "10.100.1.0/24", "10.100.2.0/24"]
+  private_subnets_cidr_block = ["10.100.10.0/24", "10.100.11.0/24", "10.100.12.0/24"]
+
+  # map public IPs on launch in public subnets
+  map_public_ip_on_launch = true
 }
 
 ```
 
-We expect to get `azs_mapping` variable in form:
+We're also checking `azs_mapping` and name resources with proper zone:
 
 ```
 variable "azs_mapping" {
@@ -30,9 +36,14 @@ variable "azs_mapping" {
 }
 ```
 
-This will allow us to generate subnets in all AZs automatically.
+## Outputs
 
-Terraform handling map of lists is not implemented (yet) in 0.8.8; eg. lookup() function expect string, not a list in map, also it is converting list to a string. Because of this, it was far more easier to implement it as a string and then split it to get a list.
+* vpc_id - ID of created VPC
+* public_subnets - list of public subnets IDs
+* private_subnets - list of private subnets IDs
+* public_route_table - public route table ID
+* private_route_tables - private route tables IDs
+* nat_gateway_public_ips - public IPs of NAT gateways
 
 # Author
 
